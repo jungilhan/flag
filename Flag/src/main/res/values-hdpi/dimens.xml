@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="thumbnail_height">110dp</dimen>
+    <integer name="numColumns">2</integer>
+</resources>

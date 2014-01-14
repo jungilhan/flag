@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SplashView">
+        <attr name="strokeWidth" format="float" />
+        <attr name="strokeColor" format="color|reference" />
+        <attr name="phase" format="float" />
+        <attr name="duration" format="integer" />
+        <attr name="fadeFactor" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="com.nbpcorp.mobilead.sdk.MobileADView">
+        <attr name="channel_id" format="string" />
+        <attr name="test" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="AppTheme">
+        <attr name="circularProgressBarStyle" format="reference"></attr>
+    </declare-styleable>
+</resources>
