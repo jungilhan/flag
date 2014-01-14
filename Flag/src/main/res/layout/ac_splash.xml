@@ -17,7 +17,7 @@
         r:phase="1.0"
         r:duration="@integer/splash_animation_time"
         r:fadeFactor="10.0"
-        r:strokeWidth="1.5"
+        r:strokeWidth="2"
         r:strokeColor="@android:color/white" />
 
     <TextView
