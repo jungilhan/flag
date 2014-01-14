@@ -35,6 +35,7 @@ public class FlagActivity extends TrackerActionBarActivity {
         setFullScreen(true);
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.accent1)));
+        getSupportActionBar().setIcon(R.drawable.ic_actionbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 

@@ -19,7 +19,7 @@ public class SplashActivity extends TrackerActionBarActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         SplashView splashView = (SplashView) findViewById(R.id.splash);
-        splashView.setSvgResource(R.raw.world);
+        splashView.setSvgResource(R.raw.flag);
 
         Animation fadeIn = new AlphaAnimation(0, 1);
         fadeIn.setInterpolator(new DecelerateInterpolator());

@@ -35,6 +35,7 @@ public class MainActivity extends TrackerActionBarActivity {
 
     private void init() {
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.accent1)));
+        getSupportActionBar().setIcon(R.drawable.ic_actionbar);
 
         if (Constants.Config.NEXT_FEATURE) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
