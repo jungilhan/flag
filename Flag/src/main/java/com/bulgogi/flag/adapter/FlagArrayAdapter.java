@@ -105,7 +105,7 @@ public class FlagArrayAdapter<T> extends BaseAdapter implements StickyGridHeader
             holder.loading = convertView.findViewById(R.id.loading);
             convertView.setTag(holder);
         } else {
-            holder = (ViewHolder)convertView.getTag();
+            holder = (ViewHolder) convertView.getTag();
         }
 
         T item = getItem(position);

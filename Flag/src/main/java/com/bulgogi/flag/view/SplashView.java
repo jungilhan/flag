@@ -96,7 +96,7 @@ public class SplashView extends View {
     }
 
     private static PathEffect createPathEffect(float pathLength, float phase, float offset) {
-        return new DashPathEffect(new float[] { pathLength, pathLength },
+        return new DashPathEffect(new float[]{pathLength, pathLength},
                 Math.max(phase * pathLength, offset));
     }
 
