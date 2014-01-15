@@ -51,6 +51,7 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
 
         <activity android:name="com.nbpcorp.mobilead.sdk.MobileAdBrowserActivity" />
+        <meta-data android:name="com.crashlytics.ApiKey" android:value="da0cd6a4f387bb2626cddeb540c5956f9a46921e"/>
     </application>
 
 </manifest>

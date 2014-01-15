@@ -10,11 +10,14 @@ import android.widget.TextView;
 
 import com.bulgogi.flag.R;
 import com.bulgogi.flag.view.SplashView;
+import com.crashlytics.android.Crashlytics;
 
 public class SplashActivity extends TrackerActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Crashlytics.start(this);
+
         setContentView(R.layout.ac_splash);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
