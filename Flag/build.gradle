@@ -29,10 +29,21 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+    signingConfigs {
+        release {
+            storeFile file("../../keystore/release.keystore")
+            storePassword "qnfrhrl12!@"
+            keyAlias "bulgogi"
+            keyPassword "qnfrhrl12!@"
+        }
+    }
+
     buildTypes {
         release {
             runProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.release
         }
     }
 }
