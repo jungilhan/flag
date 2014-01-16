@@ -18,45 +18,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_gravity="start"
-        android:visibility="gone"
         android:padding="8dp"
         android:background="#fff">
 
-        <!--
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#888"
-            android:text="Filter"/>
-
-        <View
+        <com.hb.views.PinnedSectionListView
+            android:id="@+id/category"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/accent1" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#444"
-            android:text="Sochi 2014 Olympics"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@android:color/darker_gray" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#444"
-            android:text="World Cup 2014 Brazil"/>
-        -->
+            android:layout_height="match_parent"
+            android:listSelector="@drawable/lv_selector"
+            android:divider="@null" />
     </LinearLayout>
 </android.support.v4.widget.DrawerLayout>

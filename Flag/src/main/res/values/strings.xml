@@ -4,4 +4,7 @@
     <string name="action_settings">Settings</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="drawer_section_0">National flags</string>
+    <string name="drawer_section_1">Football emblems (2013-14)</string>
+    <string name="drawer_section_2">Baseball</string>
 </resources>

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="activity_background">#F1EEEF</color>
-    <color name="accent1">#D70000</color>
-    <color name="main_label">#744F24</color>
-    <color name="sub_label">#744F24</color>
+    <color name="accent1">#254e8c</color>
+    <color name="main_label">#254e8c</color>
+    <color name="sub_label">#254e8c</color>
+    <color name="category_item">#666</color>
 </resources>

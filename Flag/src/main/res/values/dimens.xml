@@ -4,6 +4,14 @@
     <dimen name="activity_vertical_margin">0dp</dimen>
     <dimen name="activity_splash_padding">32dp</dimen>
     <dimen name="thumbnail_round">4dp</dimen>
+
+    <dimen name="h1">22sp</dimen> <!-- TextAppearance.Large -->
+    <dimen name="h2">20sp</dimen>
+    <dimen name="h3">18sp</dimen> <!-- TextAppearance.Mdeium -->
+    <dimen name="h4">16sp</dimen>
+    <dimen name="h5">14sp</dimen> <!-- TextAppearance.Small -->
+    <dimen name="h6">12sp</dimen>
+
     <integer name="short_animation_time">400</integer>
-    <integer name="splash_animation_time">3500</integer>
+    <integer name="splash_animation_time">2500</integer>
 </resources>
