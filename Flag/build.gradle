@@ -61,6 +61,5 @@ dependencies {
     compile files('lib/libGoogleAnalyticsServices-3.01.jar')
     compile files('lib/nbpmobilead_1.2.2.jar')
 
-    compile project(':HoloCircularProgressBar')
     compile project(':PinnedSectionListView')
 }

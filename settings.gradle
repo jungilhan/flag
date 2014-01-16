@@ -1,3 +1,2 @@
 include ':Flag'
-include ':HoloCircularProgressBar'
 include ':PinnedSectionListView'
