@@ -1,8 +1,10 @@
 package com.bulgogi.flag.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,10 @@ import com.bulgogi.flag.adapter.FlagArrayAdapter;
 import com.bulgogi.flag.config.Constants;
 import com.bulgogi.flag.model.Flag;
 import com.bulgogi.flag.util.Utils;
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.Fields;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.Tracker;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.nbpcorp.mobilead.sdk.MobileAdListener;
@@ -24,44 +30,66 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PlaceholderFragment extends Fragment {
+public class FlagFragment extends Fragment {
     private StickyGridHeadersGridView gvFlags;
     private MobileAdView adPost;
 
-    public PlaceholderFragment() {
+    public static FlagFragment newInstance(Context context, String title, int nameArrayId, int thumbArrayId, int flagArrayId, boolean centerInside) {
+        FlagFragment fragment = new FlagFragment();
+        Bundle args = new Bundle();
+        args.putString(Constants.ARG_TITLE, title);
+        args.putInt(Constants.ARG_ARRAY_ID_NAME, nameArrayId);
+        args.putInt(Constants.ARG_ARRAY_ID_THUMB, thumbArrayId);
+        args.putInt(Constants.ARG_ARRAY_ID_FLAG, flagArrayId);
+        args.putBoolean(Constants.ARG_THUMB_CENTER_INSIDE, centerInside);
+        fragment.setArguments(args);
+
+        Tracker easyTracker = EasyTracker.getInstance(context);
+        easyTracker.set(Fields.SCREEN_NAME, title);
+        easyTracker.send(MapBuilder.createAppView().build());
+        return fragment;
+    }
+
+    public FlagFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fr_main, container, false);
-
         gvFlags = (StickyGridHeadersGridView) rootView.findViewById(R.id.gv_flags);
 
-        List<String> countries = Arrays.asList(getResources().getStringArray(R.array.countries));
-        List<String> uris = Arrays.asList(getResources().getStringArray(R.array.thumb_uris));
-        if (countries.size() != uris.size()) {
+        ((ActionBarActivity) getActivity()).getSupportActionBar().setSubtitle(getArguments().getString(Constants.ARG_TITLE));
+        int nameArrayId = getArguments().getInt(Constants.ARG_ARRAY_ID_NAME);
+        int thumbArrayId = getArguments().getInt(Constants.ARG_ARRAY_ID_THUMB);
+        int flagArrayId = getArguments().getInt(Constants.ARG_ARRAY_ID_FLAG);
+        final List<String> countries = Arrays.asList(getResources().getStringArray(nameArrayId));
+        final List<String> thumbUris = Arrays.asList(getResources().getStringArray(thumbArrayId));
+        final List<String> flagUris = Arrays.asList(getResources().getStringArray(flagArrayId));
+        if (countries.size() != thumbUris.size() || countries.size() != flagUris.size()) {
             throw new IllegalStateException();
         }
 
         ArrayList<Flag> flags = new ArrayList<Flag>();
         for (int i = 0; i < countries.size(); i++) {
-            flags.add(Flag.valueOf(countries.get(i), uris.get(i)));
+            flags.add(Flag.valueOf(countries.get(i), thumbUris.get(i), flagUris.get(i)));
         }
 
-        FlagArrayAdapter<Flag> adapter = new FlagArrayAdapter<Flag>(
-                getActivity().getApplicationContext(), flags, R.layout.ll_section_header, R.layout.tv_grid_item);
+        boolean isCenterInside = getArguments().getBoolean(Constants.ARG_THUMB_CENTER_INSIDE);
+        FlagArrayAdapter<Flag> adapter = new FlagArrayAdapter<Flag>(getActivity().getApplicationContext(), flags, R.layout.ll_section_header, R.layout.tv_grid_item, isCenterInside);
         gvFlags.setAdapter(adapter);
-
         gvFlags.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getActivity().getApplicationContext(), FlagActivity.class);
-                intent.putExtra("index", i);
+                intent.putExtra(Constants.EXTRA_FLAG_URI, flagUris.get(i));
                 startActivity(intent);
+
+                EasyTracker easyTracker = EasyTracker.getInstance(getActivity().getApplicationContext());
+                easyTracker.send(MapBuilder.createEvent(Constants.TRACKER_UI, Constants.TRACKER_UI_CLICK, countries.get(i), null).build());
             }
         });
 
-        if (!Constants.Config.DEBUG) {
+        if (Constants.Config.AD_BANNER) {
             if (Utils.isKorea(getActivity())) {
                 adPost = (MobileAdView) rootView.findViewById(R.id.adpost);
                 adPost.setListener(new MobileAdListener() {
@@ -75,6 +103,7 @@ public class PlaceholderFragment extends Fragment {
                         }
                     }
                 });
+                adPost.start();
             } else {
                 AdView admob = (AdView) rootView.findViewById(R.id.admob);
                 admob.setVisibility(View.VISIBLE);

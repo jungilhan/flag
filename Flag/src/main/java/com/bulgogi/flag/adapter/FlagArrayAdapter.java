@@ -30,11 +30,13 @@ public class FlagArrayAdapter<T> extends BaseAdapter implements StickyGridHeader
     private Animation fadeIn;
     private ImageLoader imgLoader;
     private DisplayImageOptions dpOptions;
+    private boolean iscenterInside = false;
 
-    public FlagArrayAdapter(Context context, List<T> items, int headerResId, int itemResId) {
+    public FlagArrayAdapter(Context context, List<T> items, int headerResId, int itemResId, boolean iscenterInside) {
         this.items = items;
         this.headerResId = headerResId;
         this.itemResId = itemResId;
+        this.iscenterInside = iscenterInside;
         inflater = LayoutInflater.from(context);
         fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in);
         imgLoader = ImageLoader.getInstance();
@@ -103,6 +105,7 @@ public class FlagArrayAdapter<T> extends BaseAdapter implements StickyGridHeader
             holder.flag = (ImageView) convertView.findViewById(R.id.flag);
             holder.country = (TextView) convertView.findViewById(R.id.country);
             holder.loading = convertView.findViewById(R.id.loading);
+            if (iscenterInside) holder.flag.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -110,7 +113,7 @@ public class FlagArrayAdapter<T> extends BaseAdapter implements StickyGridHeader
 
         T item = getItem(position);
         Flag flag = (Flag) item;
-        imgLoader.displayImage(flag.getUri(), holder.flag, dpOptions, new SimpleImageLoadingListener() {
+        imgLoader.displayImage(flag.getThumbUri(), holder.flag, dpOptions, new SimpleImageLoadingListener() {
             @Override
             public void onLoadingStarted(String imageUri, View view) {
                 holder.loading.setVisibility(View.VISIBLE);

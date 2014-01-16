@@ -13,15 +13,14 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.bulgogi.flag.R;
+import com.bulgogi.flag.config.Constants;
+import com.bulgogi.flag.util.Utils;
 import com.bulgogi.flag.view.renderer.WavingFlagRenderer;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class FlagActivity extends TrackerActionBarActivity {
     private boolean DEBUG = false;
@@ -35,7 +34,6 @@ public class FlagActivity extends TrackerActionBarActivity {
         setFullScreen(true);
 
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.accent1)));
-        getSupportActionBar().setIcon(R.drawable.ic_actionbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -43,19 +41,13 @@ public class FlagActivity extends TrackerActionBarActivity {
     }
 
     private void setupViews() {
-        int index = getIntent().getIntExtra("index", -1);
+        String uri = getIntent().getStringExtra(Constants.EXTRA_FLAG_URI);
         if (DEBUG) {
-            Toast.makeText(this, "Index: " + index, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Uri: " + uri, Toast.LENGTH_SHORT).show();
         }
 
-        if (index == -1) {
-            throw new IllegalArgumentException("Index should be not -1");
-        }
-
-        List<String> thumbUris = Arrays.asList(getResources().getStringArray(R.array.thumb_uris));
-        List<String> flagUris = Arrays.asList(getResources().getStringArray(R.array.large_uris));
-        if (thumbUris.size() != flagUris.size()) {
-            throw new IllegalStateException();
+        if (uri == null) {
+            throw new IllegalArgumentException("Uri should not be empty!");
         }
 
         final FrameLayout container = (FrameLayout) findViewById(R.id.container);
@@ -75,7 +67,7 @@ public class FlagActivity extends TrackerActionBarActivity {
                 .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
                 .build();
 
-        ImageLoader.getInstance().loadImage(flagUris.get(index), options, new ImageLoadingListener() {
+        ImageLoader.getInstance().loadImage(uri, options, new ImageLoadingListener() {
             @Override
             public void onLoadingStarted(String s, View view) {
                 loading.setVisibility(View.VISIBLE);
@@ -86,8 +78,9 @@ public class FlagActivity extends TrackerActionBarActivity {
                 loading.setVisibility(View.GONE);
 
                 Bitmap powerOfTwoBitmap = Bitmap.createScaledBitmap(bitmap, (int) 1024, (int) 512, true);
+                Bitmap nonTransparent = Utils.makeTranparent(powerOfTwoBitmap);
                 glSurfaceView = new GLSurfaceView(getApplicationContext());
-                glSurfaceView.setRenderer(new WavingFlagRenderer(powerOfTwoBitmap));
+                glSurfaceView.setRenderer(new WavingFlagRenderer(nonTransparent));
                 glSurfaceView.getHolder().setKeepScreenOn(true);
                 container.addView(glSurfaceView);
             }

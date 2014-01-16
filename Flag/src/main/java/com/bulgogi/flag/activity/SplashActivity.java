@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.TextView;
 
 import com.bulgogi.flag.R;
 import com.bulgogi.flag.view.SplashView;
@@ -45,7 +44,6 @@ public class SplashActivity extends TrackerActionBarActivity {
             }
         });
 
-        TextView textView = (TextView) findViewById(R.id.title);
-        textView.startAnimation(fadeIn);
+        splashView.startAnimation(fadeIn);
     }
 }

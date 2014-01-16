@@ -1,31 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:r="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_splash_padding"
-    android:paddingRight="@dimen/activity_splash_padding"
+    android:paddingTop="@dimen/activity_splash_padding_top"
+    android:paddingLeft="@dimen/activity_splash_padding_horizontal"
+    android:paddingRight="@dimen/activity_splash_padding_horizontal"
+    android:orientation="vertical"
     android:background="@color/accent1">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/splash_title" />
 
     <com.bulgogi.flag.view.SplashView
         android:id="@+id/splash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="32dp"
+        android:paddingBottom="10dp"
         r:phase="1.0"
         r:duration="@integer/splash_animation_time"
         r:fadeFactor="10.0"
         r:strokeWidth="2"
         r:strokeColor="@android:color/white" />
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:paddingBottom="140dp"
-        android:textSize="18sp"
-        android:textColor="@android:color/white"
-        android:text="@string/app_name" />
-</FrameLayout>
+</LinearLayout>
