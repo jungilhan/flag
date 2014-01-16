@@ -155,27 +155,27 @@ public class MainActivity extends TrackerActionBarActivity {
             case 0: // National flags header
                 break;
             case 1:
-                fragment = FlagFragment.newInstance(getResources().getStringArray(R.array.national_flag_category_items)[0], R.array.countries, R.array.country_thumbs, R.array.country_flags, false);
+                fragment = FlagFragment.newInstance(this, getResources().getStringArray(R.array.national_flag_category_items)[0], R.array.countries, R.array.country_thumbs, R.array.country_flags, false);
                 break;
             case 2:
-                fragment = FlagFragment.newInstance(getResources().getStringArray(R.array.national_flag_category_items)[1], R.array.worldcup2014_countries, R.array.worldcup2014_thumbs, R.array.worldcup2014_flags, false);
+                fragment = FlagFragment.newInstance(this, getResources().getStringArray(R.array.national_flag_category_items)[1], R.array.worldcup2014_countries, R.array.worldcup2014_thumbs, R.array.worldcup2014_flags, false);
                 break;
             case 3:
-                fragment = FlagFragment.newInstance(getResources().getStringArray(R.array.national_flag_category_items)[2], R.array.olympic2014_countries, R.array.olympic2014_thumbs, R.array.olympic2014_flags, false);
+                fragment = FlagFragment.newInstance(this, getResources().getStringArray(R.array.national_flag_category_items)[2], R.array.olympic2014_countries, R.array.olympic2014_thumbs, R.array.olympic2014_flags, false);
                 break;
             case 4: // Football emblems header
                 break;
             case 5:
-                fragment = FlagFragment.newInstance("EPL", R.array.epl_clubs, R.array.epl_thumbs, R.array.epl_flags, true);
+                fragment = FlagFragment.newInstance(this, "EPL", R.array.epl_clubs, R.array.epl_thumbs, R.array.epl_flags, true);
                 break;
             case 6:
-                fragment = FlagFragment.newInstance("Serie A", R.array.seriea_clubs, R.array.seriea_thumbs, R.array.seriea_flags, true);
+                fragment = FlagFragment.newInstance(this, "Serie A", R.array.seriea_clubs, R.array.seriea_thumbs, R.array.seriea_flags, true);
                 break;
             case 7:
-                fragment = FlagFragment.newInstance("Primera Liga", R.array.primeraliga_clubs, R.array.primeraliga_thumbs, R.array.primeraliga_flags, true);
+                fragment = FlagFragment.newInstance(this, "Primera Liga", R.array.primeraliga_clubs, R.array.primeraliga_thumbs, R.array.primeraliga_flags, true);
                 break;
             case 8:
-                fragment = FlagFragment.newInstance("Bundesliga", R.array.bundesliga_clubs, R.array.bundesliga_thumbs, R.array.bundesliga_flags, true);
+                fragment = FlagFragment.newInstance(this, "Bundesliga", R.array.bundesliga_clubs, R.array.bundesliga_thumbs, R.array.bundesliga_flags, true);
                 break;
         }
 

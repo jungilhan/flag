@@ -1,5 +1,6 @@
 package com.bulgogi.flag.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,10 @@ import com.bulgogi.flag.adapter.FlagArrayAdapter;
 import com.bulgogi.flag.config.Constants;
 import com.bulgogi.flag.model.Flag;
 import com.bulgogi.flag.util.Utils;
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.Fields;
+import com.google.analytics.tracking.android.MapBuilder;
+import com.google.analytics.tracking.android.Tracker;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.nbpcorp.mobilead.sdk.MobileAdListener;
@@ -29,7 +34,7 @@ public class FlagFragment extends Fragment {
     private StickyGridHeadersGridView gvFlags;
     private MobileAdView adPost;
 
-    public static FlagFragment newInstance(String title, int nameArrayId, int thumbArrayId, int flagArrayId, boolean centerInside) {
+    public static FlagFragment newInstance(Context context, String title, int nameArrayId, int thumbArrayId, int flagArrayId, boolean centerInside) {
         FlagFragment fragment = new FlagFragment();
         Bundle args = new Bundle();
         args.putString(Constants.ARG_TITLE, title);
@@ -38,6 +43,10 @@ public class FlagFragment extends Fragment {
         args.putInt(Constants.ARG_ARRAY_ID_FLAG, flagArrayId);
         args.putBoolean(Constants.ARG_THUMB_CENTER_INSIDE, centerInside);
         fragment.setArguments(args);
+
+        Tracker easyTracker = EasyTracker.getInstance(context);
+        easyTracker.set(Fields.SCREEN_NAME, title);
+        easyTracker.send(MapBuilder.createAppView().build());
         return fragment;
     }
 
@@ -74,6 +83,9 @@ public class FlagFragment extends Fragment {
                 Intent intent = new Intent(getActivity().getApplicationContext(), FlagActivity.class);
                 intent.putExtra(Constants.EXTRA_FLAG_URI, flagUris.get(i));
                 startActivity(intent);
+
+                EasyTracker easyTracker = EasyTracker.getInstance(getActivity().getApplicationContext());
+                easyTracker.send(MapBuilder.createEvent(Constants.TRACKER_UI, Constants.TRACKER_UI_CLICK, countries.get(i), null).build());
             }
         });
 
